@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtgdekopmcjsm"]
+
+[ext_resource type="Script" path="res://scripts/tetromino_tip.gd" id="1_jcfir"]
+
+[node name="TetrominoTip" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_jcfir")
