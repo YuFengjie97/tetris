@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4eucykjj4ib2"]
+
+[ext_resource type="Script" path="res://scripts/start.gd" id="1_d3c4f"]
+
+[node name="Start" type="VBoxContainer"]
+offset_left = 276.0
+offset_top = 208.0
+offset_right = 522.0
+offset_bottom = 556.0
+script = ExtResource("1_d3c4f")
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 2
+text = "Play"
+
+[node name="Level" type="Button" parent="."]
+layout_mode = 2
+text = "Level"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Level" to="." method="_on_level_pressed"]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dyq5drc48spg0"]
+
+[ext_resource type="Script" path="res://scripts/piece_data.gd" id="1_5nkd7"]
+[ext_resource type="Texture2D" uid="uid://buuvbnabx735" path="res://assets/img/b-1-n.png" id="2_dc857"]
+
+[resource]
+script = ExtResource("1_5nkd7")
+texture = ExtResource("2_dc857")
+type = 0
