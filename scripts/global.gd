@@ -1,23 +1,21 @@
 extends Node
 
-var best_score = 10
-var score = 0
-var lines = 0
-var level_arr = [1, 5, 10, 15, 20, 25]
-var level = level_arr[0]
-var level_ind: int:
-	set(value):
-		level_ind = value
-		level = level_arr[value % level_arr.size()]
-
+signal level_change(val)
 
 const rows = 20
 const cols = 10
 const size = 25
 const grid_size = 26
-
-
 enum Tetromino { I, L, J, S, Z, O, T }
+
+var level_arr = [1, 5, 10, 15, 20, 25]
+var level = level_arr[0]
+var level_ind: int:
+	set(value):
+		level_ind = value % level_arr.size()
+		level = level_arr[level_ind]
+		level_change.emit(level)
+
 
 const piece_coords = {
 	Tetromino.I: [Vector2(-1, 0), Vector2(0, 0), Vector2(1, 0), Vector2(2, 0)],

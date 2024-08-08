@@ -1,7 +1,8 @@
 extends Node2D
+class_name TetrominoTip
 
 
-@export var type: Global.Tetromino = Global.Tetromino.I
+var type: Global.Tetromino
 @export var tetromino_scale = 0.5
 
 var piece_scene = preload("res://scenes/piece.tscn")

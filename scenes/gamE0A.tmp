@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://kdrawv15sk1x"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_810r0"]
+[ext_resource type="Texture2D" uid="uid://brfcuin0ndrgo" path="res://assets/img/bg.png" id="1_k57l5"]
+[ext_resource type="Texture2D" uid="uid://b3f8krskk7a8x" path="res://assets/img/bg-grid.png" id="3_xpg0i"]
+[ext_resource type="PackedScene" uid="uid://dtgdekopmcjsm" path="res://scenes/tetromino_tip.tscn" id="4_0eupn"]
+[ext_resource type="Script" path="res://scripts/tetromino_tips.gd" id="4_m5kv2"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="5_68eyt"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_810r0")
+metadata/_edit_lock_ = true
+
+[node name="Bg" type="Sprite2D" parent="."]
+texture = ExtResource("1_k57l5")
+offset = Vector2(400, 300)
+metadata/_edit_lock_ = true
+
+[node name="BgGrid" type="Sprite2D" parent="."]
+position = Vector2(400, 300)
+texture = ExtResource("3_xpg0i")
+metadata/_edit_lock_ = true
+
+[node name="TetrominoNextTips" type="Node" parent="."]
+script = ExtResource("4_m5kv2")
+
+[node name="TetrominoTipNext1" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
+position = Vector2(640, 256)
+metadata/_edit_lock_ = true
+
+[node name="TetrominoTipNext2" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
+position = Vector2(640, 192)
+metadata/_edit_lock_ = true
+
+[node name="TetrominoTipNext3" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
+position = Vector2(640, 128)
+metadata/_edit_lock_ = true
+
+[node name="TetrominoHoldTip" parent="." instance=ExtResource("4_0eupn")]
+visible = false
+position = Vector2(129, 138)
+metadata/_edit_lock_ = true
+
+[node name="Lines" type="Node" parent="."]
+
+[node name="ui" type="Node" parent="."]
+script = ExtResource("5_68eyt")
+
+[node name="Score" type="Label" parent="ui"]
+offset_left = 83.0
+offset_top = 376.0
+offset_right = 205.0
+offset_bottom = 408.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Level" type="Label" parent="ui"]
+offset_left = 82.0
+offset_top = 438.0
+offset_right = 206.0
+offset_bottom = 467.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Lines" type="Label" parent="ui"]
+offset_left = 83.0
+offset_top = 498.0
+offset_right = 205.0
+offset_bottom = 528.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[connection signal="record_lines_change" from="." to="ui" method="_on_game_record_lines_change"]
+[connection signal="record_score_change" from="." to="ui" method="_on_game_record_score_change"]

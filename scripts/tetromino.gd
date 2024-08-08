@@ -14,32 +14,16 @@ var type: Global.Tetromino = Global.Tetromino.I
 
 var is_locked = false
 
-# 对other_tetrominos中的piece扁平化
-var other_pieces: Array[Piece] = [] 
+@export var other_pieces: Array[Piece] = [] 
 
-# 从Game节点赋值过来的当前所有形状
-var other_tetrominos: Array[Tetromino]:
-	set(value):
-		for tetromino in value:
-			for piece in tetromino.pieces:
-				other_pieces.append(piece)
 
 # 边界坐标
 var min_x = 270
 var max_x = 530 - 26
 var max_y = 560 - 26
 
-func create(tetromino_type: Global.Tetromino):
-	type = tetromino_type
-	var data = Global.data[type]
-	var texture = data.texture
-	var piece_coords = Global.piece_coords[type]
-	for piece_coord in piece_coords:
-		var piece = piece_scene.instantiate() as Piece
-		pieces.append(piece)
-		add_child(piece)
-		piece.set_texture(texture)
-		piece.position = record_position + Global.grid_size * piece_coord
+func _ready():
+	init_pieces()
 
 
 func _input(_event):
@@ -57,6 +41,24 @@ func _input(_event):
 		rotate_tetromino(false)
 	if Input.is_action_just_pressed('drop'):
 		hard_drop()
+
+
+func init_pieces():
+	var data = Global.data[type]
+	var texture = data.texture
+	var piece_coords = Global.piece_coords[type]
+	for piece_coord in piece_coords:
+		var piece = piece_scene.instantiate() as Piece
+		pieces.append(piece)
+		add_child(piece)
+		piece.set_texture(texture)
+		# 指定位置时，piece按照指定位置生成
+		piece.position = record_position + Global.grid_size * piece_coord
+
+
+func update_type(tetromino_type: Global.Tetromino):
+	type = tetromino_type
+	init_pieces()
 
 
 func translate_tetromino(direction: Vector2):
@@ -85,7 +87,7 @@ func check_out_edge(pos: Vector2):
 
 func check_colliding_with_other_piece(pos: Vector2):
 	for other_piece in other_pieces:
-		if pos  == other_piece.position:
+		if pos == other_piece.position:
 			return true
 	return false
 
@@ -123,8 +125,6 @@ func set_pieces_pos(param):
 		
 	for i in range(next_pieces_pos.size()):
 		pieces[i].position = next_pieces_pos[i]
-
-
 
 
 func _on_timer_timeout():
