@@ -15,13 +15,15 @@ func update_type(tetromino_type: Global.Tetromino):
 	for child in childs:
 		child.queue_free()
 	type = tetromino_type
-	var data = Global.data[type]
+	var data = Global.data[type] as PieceData
 	var texture = data.texture
 	var piece_coords = Global.piece_coords[type]
+	var offset = -data.center
 	for piece_coord in piece_coords:
 		var piece = piece_scene.instantiate() as Piece
 		pieces.append(piece)
 		add_child(piece)
 		piece.set_texture(texture)
-		piece.position = piece_coord * Global.grid_size
+		piece.position = (piece_coord + offset) * Global.grid_size
+		
 

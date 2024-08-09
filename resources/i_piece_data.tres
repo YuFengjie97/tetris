@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dyq5drc48spg0"]
+[gd_resource type="Resource" script_class="PieceData" load_steps=4 format=3 uid="uid://dyq5drc48spg0"]
 
 [ext_resource type="Script" path="res://scripts/piece_data.gd" id="1_5nkd7"]
 [ext_resource type="Texture2D" uid="uid://b4002f63ktihp" path="res://assets/img/b-1-l.png" id="1_ow5pa"]
@@ -9,3 +9,4 @@ script = ExtResource("1_5nkd7")
 texture = ExtResource("2_dc857")
 type = 0
 ghost_texture = ExtResource("1_ow5pa")
+center = Vector2(1, 0.5)

@@ -26,19 +26,19 @@ metadata/_edit_lock_ = true
 script = ExtResource("4_m5kv2")
 
 [node name="TetrominoTipNext1" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
-position = Vector2(648, 256)
+position = Vector2(658.649, 270.486)
 metadata/_edit_lock_ = true
 
 [node name="TetrominoTipNext2" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
-position = Vector2(648, 192)
+position = Vector2(658.649, 199.486)
 metadata/_edit_lock_ = true
 
 [node name="TetrominoTipNext3" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
-position = Vector2(648, 128)
+position = Vector2(658.649, 134.486)
 metadata/_edit_lock_ = true
 
 [node name="TetrominoHoldTip" parent="." instance=ExtResource("4_0eupn")]
-position = Vector2(128, 128)
+position = Vector2(144, 136)
 metadata/_edit_lock_ = true
 
 [node name="Lines" type="Node" parent="."]
