@@ -7,6 +7,10 @@ const cols = 10
 const size = 25
 const grid_size = 26
 enum Tetromino { I, L, J, S, Z, O, T }
+var bound_min_x = 270
+var bound_max_x = 530 - 26
+var bound_max_y = 560 - 26
+var tetromino_init_pos = Vector2(400, 40)
 
 var level_arr = [1, 5, 10, 15, 20, 25]
 var level = level_arr[0]
@@ -45,3 +49,6 @@ var data = {
 
 var clockwise_rotation_matrix = Transform2D(Vector2(0, -1), Vector2(1, 0), Vector2(0, 0))
 var counter_clockwise_rotation_matrix = Transform2D(Vector2(0,1), Vector2(-1, 0), Vector2(0, 0))
+
+# 已经被锁定并未被消除的块
+var pieces: Array[Piece] = []

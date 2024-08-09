@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6c22420tx2vb"]
+
+[ext_resource type="Script" path="res://scripts/ghost_tetromino.gd" id="1_furwt"]
+[ext_resource type="PackedScene" uid="uid://biuycyt2jafkk" path="res://scenes/piece.tscn" id="2_7bml7"]
+
+[node name="GhostTetromino" type="Node2D"]
+script = ExtResource("1_furwt")
+
+[node name="Piece" parent="." instance=ExtResource("2_7bml7")]
+
+[node name="Piece2" parent="." instance=ExtResource("2_7bml7")]
+
+[node name="Piece3" parent="." instance=ExtResource("2_7bml7")]
+
+[node name="Piece4" parent="." instance=ExtResource("2_7bml7")]

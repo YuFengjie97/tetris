@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://kdrawv15sk1x"]
+[gd_scene load_steps=8 format=3 uid="uid://kdrawv15sk1x"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_810r0"]
 [ext_resource type="Texture2D" uid="uid://brfcuin0ndrgo" path="res://assets/img/bg.png" id="1_k57l5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dtgdekopmcjsm" path="res://scenes/tetromino_tip.tscn" id="4_0eupn"]
 [ext_resource type="Script" path="res://scripts/tetromino_tips.gd" id="4_m5kv2"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="5_68eyt"]
+[ext_resource type="PackedScene" uid="uid://c6c22420tx2vb" path="res://scenes/ghost_tetromino.tscn" id="7_vxum5"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_810r0")
@@ -25,20 +26,19 @@ metadata/_edit_lock_ = true
 script = ExtResource("4_m5kv2")
 
 [node name="TetrominoTipNext1" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
-position = Vector2(640, 256)
+position = Vector2(648, 256)
 metadata/_edit_lock_ = true
 
 [node name="TetrominoTipNext2" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
-position = Vector2(640, 192)
+position = Vector2(648, 192)
 metadata/_edit_lock_ = true
 
 [node name="TetrominoTipNext3" parent="TetrominoNextTips" instance=ExtResource("4_0eupn")]
-position = Vector2(640, 128)
+position = Vector2(648, 128)
 metadata/_edit_lock_ = true
 
 [node name="TetrominoHoldTip" parent="." instance=ExtResource("4_0eupn")]
-visible = false
-position = Vector2(129, 138)
+position = Vector2(128, 128)
 metadata/_edit_lock_ = true
 
 [node name="Lines" type="Node" parent="."]
@@ -75,6 +75,8 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="GhostTetromino" parent="." instance=ExtResource("7_vxum5")]
 
 [connection signal="record_lines_change" from="." to="ui" method="_on_game_record_lines_change"]
 [connection signal="record_score_change" from="." to="ui" method="_on_game_record_score_change"]

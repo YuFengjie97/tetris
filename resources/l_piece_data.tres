@@ -1,5 +1,6 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dfh4uwg2hkxbn"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dfh4uwg2hkxbn"]
 
+[ext_resource type="Texture2D" uid="uid://d3e2c0pfurvm" path="res://assets/img/b-3-l.png" id="1_ddjrd"]
 [ext_resource type="Script" path="res://scripts/piece_data.gd" id="1_q02wv"]
 [ext_resource type="Texture2D" uid="uid://be01f8kxaahjd" path="res://assets/img/b-3-n.png" id="2_mvt80"]
 
@@ -7,3 +8,4 @@
 script = ExtResource("1_q02wv")
 texture = ExtResource("2_mvt80")
 type = 1
+ghost_texture = ExtResource("1_ddjrd")

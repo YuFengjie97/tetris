@@ -3,5 +3,5 @@
 [ext_resource type="Script" path="res://scripts/tetromino_tip.gd" id="1_jcfir"]
 
 [node name="TetrominoTip" type="Node2D"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_jcfir")
