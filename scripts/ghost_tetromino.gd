@@ -23,6 +23,7 @@ func _ready():
 func update_pieces(tetromino: Tetromino):
 	if not visible:
 		visible = true
+	
 	type = tetromino.type
 	var data = Global.data[type] as PieceData
 	var texture = data.ghost_texture

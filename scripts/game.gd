@@ -33,6 +33,7 @@ var record_lines = 0:
 
 
 func _ready():
+	lines.move_finished.connect(_on_lines_move_finished)
 	init_tetromino()
 	for i in range(3):
 		var type = Global.Tetromino.values().pick_random()
@@ -71,18 +72,24 @@ func update_current_and_next_tetromino_type():
 
 
 func init_tetromino(pos = null):
+	if current_tetromino:
+		current_tetromino.queue_free()
+	
 	current_tetromino = tetromino_scene.instantiate() as Tetromino
 	current_tetromino.type = current_tetromino_type
 	if pos != null:
 		current_tetromino.record_position = pos as Vector2
-	current_tetromino.tetromino_locked.connect(on_tetromino_locked)
+	current_tetromino.tetromino_locked.connect(_on_tetromino_locked)
 	current_tetromino.tetromino_transformed.connect(ghost_tetromino.update_pieces)
 	add_child(current_tetromino)
 
 
 
-func on_tetromino_locked():
-	lines.tetromino_add_to_line(current_tetromino)
-	current_tetromino.queue_free()
+func _on_tetromino_locked():
+	ghost_tetromino.visible = false
+	lines.tetromino_add_to_lines(current_tetromino)
 	update_current_and_next_tetromino_type()
+
+
+func _on_lines_move_finished():
 	init_tetromino()
