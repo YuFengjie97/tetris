@@ -1,7 +1,81 @@
-[gd_scene load_steps=3 format=3 uid="uid://biuycyt2jafkk"]
+[gd_scene load_steps=6 format=3 uid="uid://biuycyt2jafkk"]
 
 [ext_resource type="Texture2D" uid="uid://buuvbnabx735" path="res://assets/img/b-1-n.png" id="1_cki0w"]
 [ext_resource type="Script" path="res://scripts/piece.gd" id="1_rvc26"]
+
+[sub_resource type="Animation" id="Animation_7hmro"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_d7yrd"]
+resource_name = "clear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.0947324),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.108819),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"handle_clear_done"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7msyp"]
+_data = {
+"RESET": SubResource("Animation_7hmro"),
+"clear": SubResource("Animation_d7yrd")
+}
 
 [node name="Piece" type="Node2D"]
 script = ExtResource("1_rvc26")
@@ -9,3 +83,8 @@ script = ExtResource("1_rvc26")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(12.5, 12.5)
 texture = ExtResource("1_cki0w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7msyp")
+}

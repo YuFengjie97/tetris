@@ -6,7 +6,7 @@ class_name GhostTetromino
 var piece_scene = preload("res://scenes/piece.tscn")
 var pieces: Array[Piece] = []
 
-@onready var piece = $Piece
+@onready var piece_1 = $Piece
 @onready var piece_2 = $Piece2
 @onready var piece_3 = $Piece3
 @onready var piece_4 = $Piece4
@@ -16,7 +16,7 @@ var is_locked = false
 
 
 func _ready():
-	pieces = [piece, piece_2, piece_3, piece_4]
+	pieces = [piece_1, piece_2, piece_3, piece_4]
 	visible = false
 
 

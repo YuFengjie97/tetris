@@ -78,45 +78,11 @@ func init_tetromino(pos = null):
 	current_tetromino.tetromino_locked.connect(on_tetromino_locked)
 	current_tetromino.tetromino_transformed.connect(ghost_tetromino.update_pieces)
 	add_child(current_tetromino)
-	
 
-
-func update_exit_pieces():
-	var pieces_all: Array[Piece] = []
-	for line in lines.get_children().filter(func(c: Line): return not c.is_clear):
-		pieces_all.append_array(line.get_children())
-	Global.pieces = pieces_all
-
-
-func tetromino_add_to_line(tetromino: Tetromino):
-	for piece in tetromino.pieces:
-		var line_arr = lines.get_children().filter(func(c): return c.position_y == piece.position.y)
-		var line
-		if line_arr.size() == 0:
-			line = line_scene.instantiate() as Line
-			lines.add_child(line)
-			line.position_y = piece.position.y
-		else:
-			line = line_arr[0]
-		piece.reparent(line)
-
-
-func clear_full_line():
-	for line in lines.get_children() as Array[Line]:
-		var is_full = line.check_full()
-		if is_full:
-			record_lines += 1
-			record_score += Global.level * 10
-			line.clear()
-			var top_lines = lines.get_children().filter(func(c: Line): return c is Line and not c.is_clear and c.position_y < line.position_y) as Array[Line]
-			for top_line in top_lines:
-				top_line.move_down()
 
 
 func on_tetromino_locked():
-	tetromino_add_to_line(current_tetromino)
+	lines.tetromino_add_to_line(current_tetromino)
 	current_tetromino.queue_free()
-	clear_full_line()
-	update_exit_pieces()
 	update_current_and_next_tetromino_type()
 	init_tetromino()

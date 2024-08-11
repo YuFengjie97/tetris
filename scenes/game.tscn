@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://kdrawv15sk1x"]
+[gd_scene load_steps=9 format=3 uid="uid://kdrawv15sk1x"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_810r0"]
 [ext_resource type="Texture2D" uid="uid://brfcuin0ndrgo" path="res://assets/img/bg.png" id="1_k57l5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dtgdekopmcjsm" path="res://scenes/tetromino_tip.tscn" id="4_0eupn"]
 [ext_resource type="Script" path="res://scripts/tetromino_tips.gd" id="4_m5kv2"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="5_68eyt"]
+[ext_resource type="Script" path="res://scripts/lines.gd" id="6_48f1f"]
 [ext_resource type="PackedScene" uid="uid://c6c22420tx2vb" path="res://scenes/ghost_tetromino.tscn" id="7_vxum5"]
 
 [node name="Game" type="Node2D"]
@@ -42,6 +43,7 @@ position = Vector2(144, 136)
 metadata/_edit_lock_ = true
 
 [node name="Lines" type="Node" parent="."]
+script = ExtResource("6_48f1f")
 
 [node name="ui" type="Node" parent="."]
 script = ExtResource("5_68eyt")
