@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://kdrawv15sk1x"]
+[gd_scene load_steps=9 format=3 uid="uid://kdrawv15sk1x"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_810r0"]
 [ext_resource type="Texture2D" uid="uid://brfcuin0ndrgo" path="res://assets/img/bg.png" id="1_k57l5"]
@@ -8,11 +8,6 @@
 [ext_resource type="Script" path="res://scripts/tetromino_tips.gd" id="4_m5kv2"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="5_68eyt"]
 [ext_resource type="PackedScene" uid="uid://c6c22420tx2vb" path="res://scenes/ghost_tetromino.tscn" id="7_vxum5"]
-[ext_resource type="AudioStream" uid="uid://d0ykwo6jwmx2o" path="res://assets/audio/hardDrop.mp3" id="9_lqg7e"]
-[ext_resource type="AudioStream" uid="uid://bkya05segmnfl" path="res://assets/audio/move.mp3" id="10_bv4n5"]
-[ext_resource type="AudioStream" uid="uid://hpegotr3rqjg" path="res://assets/audio/rotate.mp3" id="11_eah3g"]
-[ext_resource type="AudioStream" uid="uid://cxq1wk6v6glgo" path="res://assets/audio/lineClear.mp3" id="12_3j28p"]
-[ext_resource type="AudioStream" uid="uid://b2x8c0cy8lqro" path="res://assets/audio/hold.mp3" id="13_q6ux6"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_810r0")
@@ -84,21 +79,5 @@ metadata/_edit_lock_ = true
 
 [node name="GhostTetromino" parent="." instance=ExtResource("7_vxum5")]
 
-[node name="HardDrop" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("9_lqg7e")
-
-[node name="Move" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_bv4n5")
-
-[node name="Rotate" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_eah3g")
-
-[node name="LineClear" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("12_3j28p")
-
-[node name="Hold" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("13_q6ux6")
-
 [connection signal="record_lines_change" from="." to="ui" method="_on_game_record_lines_change"]
 [connection signal="record_score_change" from="." to="ui" method="_on_game_record_score_change"]
-[connection signal="line_clear" from="Board" to="." method="_on_board_line_clear"]

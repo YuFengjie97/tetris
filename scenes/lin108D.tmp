@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://5wy5sqhlpicl"]
+
+[ext_resource type="Script" path="res://scripts/line.gd" id="1_x3iwy"]
+[ext_resource type="AudioStream" uid="uid://cxq1wk6v6glgo" path="res://assets/audio/lineClear.mp3" id="2_6utvt"]
+
+[node name="Line" type="Node2D"]
+script = ExtResource("1_x3iwy")
+
+[node name="clear" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_6utvt")

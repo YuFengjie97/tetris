@@ -5,6 +5,7 @@ signal clear_finished
 signal move_finished
 
 
+
 var is_cleared = false
 var pos_y
 var piece_clear_num = 0
@@ -30,7 +31,6 @@ func clear():
 
 
 func _on_all_piece_clear():
-	print()
 	piece_clear_num += 1
 	if piece_clear_num == Global.cols:
 		queue_free()

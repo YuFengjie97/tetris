@@ -3,6 +3,9 @@ class_name Tetromino
 
 signal tetromino_locked
 signal tetromino_transformed
+signal tetromino_hard_drop
+signal move
+signal rotate
 
 var piece_scene = preload("res://scenes/piece.tscn")
 var pieces: Array[Piece] = []
@@ -30,6 +33,7 @@ func _input(_event):
 		rotate_tetromino(false)
 	if Input.is_action_just_pressed('drop'):
 		hard_drop()
+		tetromino_hard_drop.emit()
 
 
 func init_pieces():
@@ -113,6 +117,12 @@ func transform_pieces(param) -> bool:
 		
 	for i in range(next_pieces_pos.size()):
 		pieces[i].position = next_pieces_pos[i]
+	
+	if next_pieces_pos.size() > 0:
+		if is_translate:
+			move.emit()
+		else:
+			rotate.emit()
 	
 	return pieces.size() > 0
 
