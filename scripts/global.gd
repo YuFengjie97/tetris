@@ -12,13 +12,7 @@ var bound_max_x = 530 - 26
 var bound_max_y = 560 - 26
 var tetromino_init_pos = Vector2(400, 40)
 
-var level_arr = [1, 5, 10, 15, 20, 25]
-var level = level_arr[0]
-var level_ind: int:
-	set(value):
-		level_ind = value % level_arr.size()
-		level = level_arr[level_ind]
-		level_change.emit(level)
+var level = 1
 
 
 const piece_coords = {

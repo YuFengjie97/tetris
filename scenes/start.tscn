@@ -1,49 +1,63 @@
-[gd_scene load_steps=2 format=3 uid="uid://75uke1kfua3v"]
+[gd_scene load_steps=4 format=3 uid="uid://75uke1kfua3v"]
 
-[sub_resource type="GDScript" id="GDScript_82ke0"]
-script/source = "extends Node2D
+[ext_resource type="Texture2D" uid="uid://brfcuin0ndrgo" path="res://assets/img/bg.png" id="1_c84xy"]
+[ext_resource type="Script" path="res://scripts/start.gd" id="1_uujcf"]
+[ext_resource type="Theme" uid="uid://gt7h6bbig5kt" path="res://resources/theme.tres" id="2_tidda"]
 
-@onready var bt_level = $VBoxContainer/Level
-@onready var ui_start = $\".\"
+[node name="Start" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("2_tidda")
+script = ExtResource("1_uujcf")
 
-func _ready():
-	update_level_label()
-
-
-func update_level_label():
-	bt_level.text = 'Level: ' + str(Manager.level)
-
-
-func _on_play_pressed():
-	#ui_start.visible = false
-	Global.goto_scene(\"res://scenes/game.tscn\")
-	print('start')
-
-
-func _on_level_pressed():
-	Manager.level_ind += 1
-	update_level_label()
-"
-
-[node name="Start" type="Node2D"]
-script = SubResource("GDScript_82ke0")
+[node name="Bg" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_c84xy")
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 173.0
-offset_top = 129.0
-offset_right = 604.0
-offset_bottom = 487.0
+[node name="Play" type="Button" parent="."]
+offset_left = 312.0
+offset_top = 71.0
+offset_right = 474.0
+offset_bottom = 128.0
+theme_type_variation = &"ButtonGreen"
+theme_override_font_sizes/font_size = 24
+text = "PLAY"
 
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Level" type="Button" parent="."]
+offset_left = 308.0
+offset_top = 151.0
+offset_right = 458.0
+offset_bottom = 201.0
+theme_override_font_sizes/font_size = 18
+text = "LEVEL: "
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = 289.0
+offset_top = 272.0
+offset_right = 517.0
+offset_bottom = 527.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
-text = "play
-"
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_lock_ = true
 
-[node name="Level" type="Button" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-text = "level
-"
 
-[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="VBoxContainer/Level" to="." method="_on_level_pressed"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "HGIH SCORES"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Level" to="." method="_on_level_pressed"]

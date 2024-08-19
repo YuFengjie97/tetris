@@ -30,9 +30,13 @@ var record_lines = 0:
 @onready var lines = $Lines
 @onready var tetromino_next_tips = $TetrominoNextTips
 @onready var tetromino_hold_tip = $TetrominoHoldTip
+@onready var ui_score = $ui/Score
+@onready var ui_level = $ui/Level
+@onready var ui_lines = $ui/Lines
 
 
 func _ready():
+	ui_level.text = str(Global.level)
 	lines.move_finished.connect(_on_lines_move_finished)
 	init_tetromino()
 	for i in range(3):
