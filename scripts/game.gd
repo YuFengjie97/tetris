@@ -121,3 +121,7 @@ func _on_lines_move_finished():
 
 func _on_board_line_clear():
 	audio_line_clear.play()
+
+
+func _on_pause_pressed():
+	get_tree().paused = true
