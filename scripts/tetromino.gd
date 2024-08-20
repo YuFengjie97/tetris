@@ -2,20 +2,20 @@ extends Node2D
 class_name Tetromino
 
 signal tetromino_locked
-signal tetromino_transformed
-signal tetromino_hard_drop
-signal move
-signal rotate
 
 var piece_scene = preload("res://scenes/piece.tscn")
 var pieces: Array[Piece] = []
 var record_position: Vector2 = Global.tetromino_init_pos
 var type: Global.Tetromino = Global.Tetromino.I
 var is_locked = false
-
+@onready var speed_timer = $Speed
+@onready var audio_hard_drop = $HardDrop
+@onready var audio_move = $Move
+@onready var audio_rotate = $Rotate
+@onready var ghost_tetromino = $GhostTetromino
 
 func _ready():
-	init_pieces()
+	update_speed_timer_by_level()
 
 
 func _input(_event):
@@ -33,10 +33,13 @@ func _input(_event):
 		rotate_tetromino(false)
 	if Input.is_action_just_pressed('drop'):
 		hard_drop()
-		tetromino_hard_drop.emit()
+		audio_hard_drop.play()
 
 
-func init_pieces():
+func init(t: Global.Tetromino, pos = null):
+	type = t
+	if pos != null:
+		record_position = pos
 	var data = Global.data[type]
 	var texture = data.texture
 	var piece_coords = Global.piece_coords[type]
@@ -46,7 +49,7 @@ func init_pieces():
 		add_child(piece)
 		piece.set_texture(texture)
 		piece.position = record_position + Global.grid_size * piece_coord
-	tetromino_transformed.emit(self)
+	ghost_tetromino.update(type, pieces)
 
 
 func translate_tetromino(direction: Vector2, is_hard_drop = false):
@@ -54,7 +57,8 @@ func translate_tetromino(direction: Vector2, is_hard_drop = false):
 		return
 	var is_transformed = transform_pieces(direction)
 	if is_transformed and not is_hard_drop:
-		tetromino_transformed.emit(self)
+		ghost_tetromino.update(type, pieces)
+		
 
 
 func rotate_tetromino(is_clockwise: bool):
@@ -63,7 +67,7 @@ func rotate_tetromino(is_clockwise: bool):
 	var rotate_matrix = Global.clockwise_rotation_matrix if is_clockwise else Global.counter_clockwise_rotation_matrix
 	var is_transformed = transform_pieces(rotate_matrix)
 	if is_transformed:
-		tetromino_transformed.emit(self)
+		ghost_tetromino.update(type, pieces)
 
 
 func hard_drop():
@@ -113,19 +117,22 @@ func transform_pieces(param) -> bool:
 	# 下落触底锁定
 	if next_pieces_pos.size() == 0 and is_translate and param == Vector2.DOWN:
 		is_locked = true
-		tetromino_locked.emit()
+		tetromino_locked.emit(self)
+		queue_free()
 		
 	for i in range(next_pieces_pos.size()):
 		pieces[i].position = next_pieces_pos[i]
 	
 	if next_pieces_pos.size() > 0:
 		if is_translate:
-			move.emit()
+			audio_move.play()
 		else:
-			rotate.emit()
+			audio_rotate.play()
 	
 	return pieces.size() > 0
 
 func _on_timer_timeout():
-	pass
-	#translate_tetromino(Vector2.DOWN)
+	translate_tetromino(Vector2.DOWN)
+
+func update_speed_timer_by_level():
+	speed_timer.wait_time = (25.1 - Global.level) / 25.0 * 2.

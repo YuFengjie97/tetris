@@ -10,9 +10,9 @@ enum Tetromino { I, L, J, S, Z, O, T }
 var bound_min_x = 270
 var bound_max_x = 530 - 26
 var bound_max_y = 560 - 26
-var tetromino_init_pos = Vector2(400, 40)
+var tetromino_init_pos = Vector2(400, -12)
 
-var level = 1
+var level = 1.0
 
 
 const piece_coords = {

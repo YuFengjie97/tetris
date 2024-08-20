@@ -1,26 +1,7 @@
-extends Control
+extends PanelContainer
 
 
-@onready var bt_play = $Play
-@onready var bt_level = $Level
-@onready var score_list = $PanelContainer/MarginContainer/VBoxContainer
-
-var game_scene_path = "res://scenes/game.tscn"
-
-func _ready():
-	init_score_list()
-	bt_level.text = 'LEVEL: ' + str(Global.level)
-
-
-func _on_play_pressed():
-	get_tree().change_scene_to_file(game_scene_path)
-
-
-func _on_level_pressed():
-	Global.level = 5.0 if Global.level == 1.0 else (Global.level + 5.0)
-	if Global.level > 25.0:
-		Global.level = 1.0
-	bt_level.text = 'LEVEL: ' + str(Global.level)
+@onready var score_list = $VBoxContainer/PanelContainer/VBoxContainer
 
 
 func init_score_list():

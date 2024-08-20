@@ -20,16 +20,15 @@ func _ready():
 	visible = false
 
 
-func update_pieces(tetromino: Tetromino):
+func update(t: Global.Tetromino, tetromino_pieces: Array[Piece]):
 	if not visible:
 		visible = true
 	
-	type = tetromino.type
-	var data = Global.data[type] as PieceData
+	var data = Global.data[t] as PieceData
 	var texture = data.ghost_texture
 	for i in range(pieces.size()):
 		pieces[i].set_texture(texture)
-		pieces[i].position = tetromino.pieces[i].position
+		pieces[i].position = tetromino_pieces[i].position
 	is_locked = false
 	ghost_down()
 

@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bix1xqpogpa0u"]
+[gd_scene load_steps=3 format=3 uid="uid://bix1xqpogpa0u"]
 
 [ext_resource type="Script" path="res://scripts/board.gd" id="1_oji3x"]
+[ext_resource type="AudioStream" uid="uid://cxq1wk6v6glgo" path="res://assets/audio/lineClear.mp3" id="2_wywqc"]
 
 [node name="Board" type="Node"]
 script = ExtResource("1_oji3x")
 
 [node name="Lines" type="Node" parent="."]
+
+[node name="LineClear" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_wywqc")

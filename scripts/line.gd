@@ -35,7 +35,6 @@ func _on_all_piece_clear():
 	if piece_clear_num == Global.cols:
 		queue_free()
 		clear_finished.emit()
-		print('line clear111111')
 
 func set_pos_y_by_move_down():
 	pos_y += Global.grid_size 

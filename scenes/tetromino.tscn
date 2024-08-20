@@ -1,11 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2sghfef5n8hr"]
+[gd_scene load_steps=6 format=3 uid="uid://b2sghfef5n8hr"]
 
 [ext_resource type="Script" path="res://scripts/tetromino.gd" id="1_ne1c5"]
+[ext_resource type="AudioStream" uid="uid://d0ykwo6jwmx2o" path="res://assets/audio/hardDrop.mp3" id="2_bdjo7"]
+[ext_resource type="AudioStream" uid="uid://bkya05segmnfl" path="res://assets/audio/move.mp3" id="3_kshrx"]
+[ext_resource type="AudioStream" uid="uid://hpegotr3rqjg" path="res://assets/audio/rotate.mp3" id="4_kri4w"]
+[ext_resource type="PackedScene" uid="uid://c6c22420tx2vb" path="res://scenes/ghost_tetromino.tscn" id="5_t131m"]
 
 [node name="Tetromino" type="Node2D"]
 script = ExtResource("1_ne1c5")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Speed" type="Timer" parent="."]
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="HardDrop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_bdjo7")
+
+[node name="Move" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kshrx")
+
+[node name="Rotate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kri4w")
+
+[node name="GhostTetromino" parent="." instance=ExtResource("5_t131m")]
+
+[connection signal="timeout" from="Speed" to="." method="_on_timer_timeout"]
