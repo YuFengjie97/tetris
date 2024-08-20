@@ -38,6 +38,8 @@ var record_lines = 0:
 @onready var audio_rotate = $Rotate
 @onready var audio_line_clear = $LineClear
 @onready var audio_hold = $Hold
+@onready var pop_pause = $PanelContainer
+@onready var loading = $Loading
 
 
 func _ready():
@@ -123,5 +125,11 @@ func _on_board_line_clear():
 	audio_line_clear.play()
 
 
+func _on_resume_pressed():
+	pop_pause.visible = false
+	loading.loading()
+
+
 func _on_pause_pressed():
 	get_tree().paused = true
+	pop_pause.visible = true
