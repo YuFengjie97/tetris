@@ -80,6 +80,6 @@ func update_exit_pieces():
 	for line in lines_node.get_children().filter(func(c: Line): return c is Line and not c.is_cleared):
 		pieces_all.append_array(line.get_children().filter(func(c): return c is Piece))
 		min_y_line = min(min_y_line, line.pos_y)
-		if min_y_line < 14:
+		if min_y_line == 40:
 			game_over.emit()
 	Global.pieces = pieces_all

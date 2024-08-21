@@ -35,16 +35,33 @@ var record_level = Global.level:
 @onready var pop_pause = $PopPause
 @onready var loading = $Loading
 @onready var pop_game_over = $PopGameOver
+@onready var pop_record = $PopRecord
+@onready var your_score = $PopRecord/VBoxContainer/MarginContainer2/YourScore
 
 
 func _ready():
+	reset()
+
+
+func reset():
+	Global.pieces.clear()
+	for line in board.get_node("Lines").get_children():
+		line.free()
+	for tetromino in board.get_children().filter(func(c): return c is Tetromino):
+		tetromino.free()
+	current = null
 	init()
 	init_current()
+	board.min_y_line = 10000
+	record_level = Global.level
+	record_lines = 0
+	record_score = 0
 	
 
 func init():
 	ui_level.text = str(Global.level)
-	board.action_finished.connect(on_board_action_finished)
+	if not board.action_finished.is_connected(on_board_action_finished):
+		board.action_finished.connect(on_board_action_finished)
 	current_type = Global.Tetromino.values().pick_random()
 	for i in range(3):
 		var type = Global.Tetromino.values().pick_random()
@@ -110,22 +127,30 @@ func on_board_action_finished(clear_num):
 
 
 func _on_resume_pressed():
-	pop_pause.visible = false
+	pop_pause.hide()
 	loading.loading()
 
 
 func _on_pause_pressed():
 	get_tree().paused = true
-	pop_pause.visible = true
-
+	pop_pause.show()
 
 func _on_board_game_over():
-	pop_game_over.init_score_list()
-	pop_game_over.visible = true
+	get_tree().paused = true
+	var is_have_new_record = Global.score_list.any(func (e): return record_score > e.score)
+	if is_have_new_record:
+		your_score.text = 'Your Score: ' + str(record_score)
+		pop_record.show()
+	else:
+		pop_game_over.init_score_list()
+		pop_game_over.show()
 
+
+var start_scene = preload("res://scenes/start.tscn")
 
 func _on_home_pressed():
-	get_tree().change_scene_to_file("res://scenes/start.tscn")
+	get_tree().paused = false
+	get_tree().change_scene_to_packed(start_scene)
 
 
 func _on_level_up_timeout():
@@ -136,3 +161,13 @@ func _on_level_up_timeout():
 
 func _on_score_up_timeout():
 	record_score += record_level * 10
+
+
+func _on_again_pressed():
+	pop_game_over.hide()
+	get_tree().paused = false
+	reset()
+
+
+func _on_pop_record_save_ok():
+	_on_home_pressed()

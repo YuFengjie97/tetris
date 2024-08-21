@@ -13,6 +13,7 @@ var is_locked = false
 @onready var audio_move = $Move
 @onready var audio_rotate = $Rotate
 @onready var ghost_tetromino = $GhostTetromino
+@onready var anim_free = $Free
 
 func _ready():
 	update_speed_timer_by_level()
@@ -32,8 +33,8 @@ func _input(_event):
 	if Input.is_action_just_pressed('counter_clockwise'):
 		rotate_tetromino(false)
 	if Input.is_action_just_pressed('drop'):
+		anim_free.play("drop_free")
 		hard_drop()
-		audio_hard_drop.play()
 
 
 func init(t: Global.Tetromino, pos = null):
@@ -118,7 +119,6 @@ func transform_pieces(param) -> bool:
 	if next_pieces_pos.size() == 0 and is_translate and param == Vector2.DOWN:
 		is_locked = true
 		tetromino_locked.emit(self)
-		queue_free()
 		
 	for i in range(next_pieces_pos.size()):
 		pieces[i].position = next_pieces_pos[i]

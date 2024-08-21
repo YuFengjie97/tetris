@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://kdrawv15sk1x"]
+[gd_scene load_steps=19 format=3 uid="uid://kdrawv15sk1x"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_810r0"]
 [ext_resource type="Texture2D" uid="uid://brfcuin0ndrgo" path="res://assets/img/bg.png" id="1_k57l5"]
@@ -6,9 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dtgdekopmcjsm" path="res://scenes/tetromino_tip.tscn" id="4_0eupn"]
 [ext_resource type="PackedScene" uid="uid://bix1xqpogpa0u" path="res://scenes/board.tscn" id="4_kenvd"]
 [ext_resource type="Script" path="res://scripts/tetromino_tips.gd" id="4_m5kv2"]
+[ext_resource type="Script" path="res://scripts/pop_pause.gd" id="10_4cda4"]
 [ext_resource type="AudioStream" uid="uid://b2x8c0cy8lqro" path="res://assets/audio/hold.mp3" id="13_q6ux6"]
+[ext_resource type="Script" path="res://scripts/pop_record.gd" id="13_wne4x"]
 [ext_resource type="Theme" uid="uid://gt7h6bbig5kt" path="res://resources/theme.tres" id="14_nhsiw"]
 [ext_resource type="Script" path="res://scripts/loading.gd" id="15_bsuwa"]
+[ext_resource type="Script" path="res://scripts/pop_how_to_play.gd" id="15_dvcq6"]
 [ext_resource type="Script" path="res://scripts/pop_game_over.gd" id="16_ggeei"]
 [ext_resource type="Texture2D" uid="uid://y5d2j2fcr5w7" path="res://assets/img/icon-home-30.png" id="17_5x5gu"]
 [ext_resource type="Texture2D" uid="uid://dvavqqvp1qbur" path="res://assets/img/icon-replay-30.png" id="18_m3255"]
@@ -179,46 +182,6 @@ offset_bottom = 563.0
 theme = ExtResource("14_nhsiw")
 theme_type_variation = &"ButtonPause"
 
-[node name="PopPause" type="PanelContainer" parent="."]
-process_mode = 3
-visible = false
-z_index = 10
-offset_left = 288.0
-offset_top = 172.0
-offset_right = 510.0
-offset_bottom = 485.0
-theme = ExtResource("14_nhsiw")
-theme_type_variation = &"PanelMenu"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PopPause"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="PopPause/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 10
-
-[node name="Label" type="Label" parent="PopPause/VBoxContainer/MarginContainer"]
-layout_mode = 2
-text = "PAUSE"
-horizontal_alignment = 1
-
-[node name="Resume" type="Button" parent="PopPause/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"ButtonGreen"
-text = "RESUME"
-
-[node name="Options" type="Button" parent="PopPause/VBoxContainer"]
-layout_mode = 2
-text = "OPTIONS"
-
-[node name="HowToPlay" type="Button" parent="PopPause/VBoxContainer"]
-layout_mode = 2
-text = "HOW TO PLAY"
-
-[node name="Quit" type="Button" parent="PopPause/VBoxContainer"]
-layout_mode = 2
-text = "QUIT"
-
 [node name="Loading" type="Node2D" parent="."]
 process_mode = 3
 visible = false
@@ -242,8 +205,45 @@ libraries = {
 "": SubResource("AnimationLibrary_3bwbd")
 }
 
+[node name="PopPause" type="PanelContainer" parent="."]
+process_mode = 2
+visible = false
+z_index = 10
+offset_left = 288.0
+offset_top = 172.0
+offset_right = 510.0
+offset_bottom = 475.0
+theme = ExtResource("14_nhsiw")
+theme_type_variation = &"PanelMenu"
+script = ExtResource("10_4cda4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopPause"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopPause/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="PopPause/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="PopPause/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ButtonGreen"
+text = "RESUME"
+
+[node name="HowToPlay" type="Button" parent="PopPause/VBoxContainer"]
+layout_mode = 2
+text = "HOW TO PLAY"
+
+[node name="Quit" type="Button" parent="PopPause/VBoxContainer"]
+layout_mode = 2
+text = "QUIT"
+
 [node name="PopGameOver" type="PanelContainer" parent="."]
-process_mode = 3
+process_mode = 2
 visible = false
 z_index = 10
 offset_left = 288.0
@@ -283,6 +283,9 @@ theme_override_font_sizes/font_size = 14
 text = "HIGH SCORES"
 horizontal_alignment = 1
 
+[node name="ScoreList" type="VBoxContainer" parent="PopGameOver/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="FlowContainer" type="HBoxContainer" parent="PopGameOver/VBoxContainer"]
 layout_mode = 2
 
@@ -299,6 +302,104 @@ theme_type_variation = &"ButtonGreen"
 icon = ExtResource("18_m3255")
 icon_alignment = 1
 
+[node name="PopRecord" type="PanelContainer" parent="."]
+process_mode = 2
+visible = false
+z_index = 10
+offset_left = 252.0
+offset_top = 235.0
+offset_right = 545.0
+offset_bottom = 469.0
+theme = ExtResource("14_nhsiw")
+theme_type_variation = &"PanelMenu"
+script = ExtResource("13_wne4x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopRecord"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopRecord/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="PopRecord/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Type your name"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="PopRecord/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="YourScore" type="Label" parent="PopRecord/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Your Score:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopRecord/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="PopRecord/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameConfirm" type="Button" parent="PopRecord/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ButtonGreen"
+text = "OK"
+
+[node name="PopHowToPlay" type="PanelContainer" parent="."]
+process_mode = 2
+visible = false
+z_index = 20
+offset_left = 265.0
+offset_top = 136.0
+offset_right = 535.0
+offset_bottom = 302.0
+theme = ExtResource("14_nhsiw")
+script = ExtResource("15_dvcq6")
+
+[node name="MarginContainer" type="MarginContainer" parent="PopHowToPlay"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopHowToPlay/MarginContainer"]
+layout_mode = 2
+
+[node name="A" type="Label" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "A: move to left"
+
+[node name="S" type="Label" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "S: move to down
+"
+
+[node name="D" type="Label" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "D: move to right"
+
+[node name="Drop" type="Label" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Space: hard drop"
+
+[node name="Q" type="Label" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Q: counter clockwise rotate"
+
+[node name="E" type="Label" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "E: clockwise rotate"
+
+[node name="OK" type="Button" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ButtonGreen"
+text = "OK"
+
 [node name="LevelUp" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
@@ -310,6 +411,13 @@ autostart = true
 [connection signal="game_over" from="Board" to="." method="_on_board_game_over"]
 [connection signal="pressed" from="Pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="PopPause/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PopPause/VBoxContainer/HowToPlay" to="PopPause" method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="PopGameOver/VBoxContainer/FlowContainer/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="PopGameOver/VBoxContainer/FlowContainer/Again" to="." method="_on_again_pressed"]
+[connection signal="save_ok" from="PopRecord" to="." method="_on_pop_record_save_ok"]
+[connection signal="pressed" from="PopRecord/VBoxContainer/HBoxContainer/NameConfirm" to="." method="_on_name_confirm_pressed"]
+[connection signal="pressed" from="PopRecord/VBoxContainer/HBoxContainer/NameConfirm" to="PopRecord" method="_on_name_confirm_pressed"]
+[connection signal="pressed" from="PopHowToPlay/MarginContainer/VBoxContainer/OK" to="PopGameOver" method="_on_ok_pressed"]
+[connection signal="pressed" from="PopHowToPlay/MarginContainer/VBoxContainer/OK" to="PopHowToPlay" method="_on_ok_pressed"]
 [connection signal="timeout" from="LevelUp" to="." method="_on_level_up_timeout"]
 [connection signal="timeout" from="ScoreUp" to="." method="_on_score_up_timeout"]

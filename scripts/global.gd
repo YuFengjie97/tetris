@@ -10,9 +10,20 @@ enum Tetromino { I, L, J, S, Z, O, T }
 var bound_min_x = 270
 var bound_max_x = 530 - 26
 var bound_max_y = 560 - 26
-var tetromino_init_pos = Vector2(400, -12)
+var tetromino_init_pos = Vector2(400, 40)
 
 var level = 1.0
+
+var score_list = []
+func get_score_list_from_config_file():
+	var config = ConfigFile.new()
+	var load_err = config.load('user://save.cfg')
+	var list = []
+	if load_err == OK:
+		for section in config.get_sections():
+			var s_score = config.get_value(section, 'score')
+			list.append({"nick_name": section, "score": s_score})
+	return list
 
 
 const piece_coords = {
