@@ -7,6 +7,5 @@
 [resource]
 script = ExtResource("1_q02wv")
 texture = ExtResource("2_mvt80")
-type = 1
 ghost_texture = ExtResource("1_ddjrd")
 center = Vector2(0.5, 1)
