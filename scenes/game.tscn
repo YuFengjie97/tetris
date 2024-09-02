@@ -395,6 +395,10 @@ text = "Q: counter clockwise rotate"
 layout_mode = 2
 text = "E: clockwise rotate"
 
+[node name="Hold" type="Label" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Mouse Right: toggle hold"
+
 [node name="OK" type="Button" parent="PopHowToPlay/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"ButtonGreen"
